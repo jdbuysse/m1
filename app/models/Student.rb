@@ -31,15 +31,12 @@ class Student < ActiveRecord::Base
     def main_menu
 
         prompt = TTY::Prompt.new
-
         choices = {
             'Explore concepts' => 1,
             'See who else is here' => 2,
             'Exit the program' => 3,
         }
-
         menu_response = prompt.select("\nWhat would you like to do?", choices)
-
         case menu_response
         when 1
             explore_concepts
@@ -53,7 +50,22 @@ class Student < ActiveRecord::Base
     def explore_concepts
         ds_choice = select_data_structure
         task_choice = select_tasks_from_data_structure(ds_choice)
+        puts "You selected #{task_choice}. \n"
+        concept = Concept.find_concept_by_task(task_choice)
+        display_task(concept)
+        puts "What do ya think? Enter how comfortable you'd be"
+        puts "with this task on a scale from 1-5."
+        puts "1 == no idea, 5 == no problemo"
+        input = gets.chomp
+        puts "you're at a #{input}? great! we'll add that info"
+        puts "press enter to go back to main menu"
+        add_lesson(concept, input)
+        gets
+    end
 
+    def display_task(concept)
+        puts concept.task
+        puts concept.full_description
     end
 
     def select_data_structure
@@ -70,7 +82,6 @@ class Student < ActiveRecord::Base
         tasks = Concept.list_tasks_by_data_structure(ds)
         tasks.each_with_index { |task, index| puts "#{index +1}. #{task} \n" }
         task_input = gets.chomp
-        puts "You selected #{tasks[(task_input.to_i)-1]}"
         return tasks[(task_input.to_i)-1]
     end
 

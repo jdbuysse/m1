@@ -12,5 +12,9 @@ class Concept < ActiveRecord::Base
         end
     end
 
+    def self.find_concept_by_task(task)
+        Concept.find_by task: task
+    end
+
 
 end
