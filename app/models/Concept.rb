@@ -7,9 +7,9 @@ class Concept < ActiveRecord::Base
     end
 
     def self.list_tasks_by_data_structure(data_structure)
-        Concept.where(data_structure: data_structure).find_each do |concept| 
-            puts concept.task
+        Concept.where(data_structure: data_structure).find_each.map do |concept| 
+            concept.task
         end
-        binding.pry
     end
+
 end

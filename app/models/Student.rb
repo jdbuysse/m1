@@ -43,9 +43,14 @@ class Student < ActiveRecord::Base
     end
 
     def pick_task
+        puts "Select a data structure for which you'd like to see some tasks"
         puts Concept.list_unique_data_structures
         input = gets.chomp
-        Concept.list_tasks_by_data_structure(input)
+        puts "Here are the tasks for #{input}:"
+        tasks = Concept.list_tasks_by_data_structure(input)
+        tasks.each_with_index { |task, index| puts "#{index +1}. #{task} \n" }
+        # use user inputed number to grab tasks[index]
+        binding.pry
     end
 
 end
