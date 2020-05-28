@@ -16,8 +16,7 @@ l1 = Lesson.create(
     full_description: "yadda yadda"
     )
 
-# #assign multiple to one book
-# BookAuthor.create(author_id: ta.id, book_id: doe.id)
-# BookAuthor.create(author_id: mh.id, book_id: doe.id)
+Lesson.create(
+    
+)
 
-binding.pry

@@ -7,9 +7,29 @@ class Student < ActiveRecord::Base
 
         if @found_user
             puts "Welcome back, #{@found_user.name}!"
+            @found_user.main_menu
         else 
-            puts "We'll create a student account for you"
+            create_user(user_input)
         end
     end
-    
+
+    def self.create_user(user_name)
+        @new_user = create(name: user_name, track: 'SWE')
+        puts "Hello, #{@new_user.name}! Glad you could join us."
+        @new_user.main_menu
+    end
+
+    def main_menu
+        puts "Back to main"
+        prompt = TTY::Prompt.new
+
+        choices = {
+            'Explore concepts' => 1,
+            'See who else is here' => 2,
+            'Exit the program' => 3,
+        }
+
+        menu_response = prompt.select("\nWhat would you like to do?", choices)
+    end
+
 end
