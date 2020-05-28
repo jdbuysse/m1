@@ -7,9 +7,9 @@ class Concept < ActiveRecord::Base
     end
 
     def self.list_tasks_by_data_structure(data_structure)
-        list = Concept.list_unique_data_structures
-        if data_structure == list
-            return list[0][1]
+        Concept.where(data_structure: data_structure).find_each.map do |concept| 
+            concept.task
         end
     end
+
 end
