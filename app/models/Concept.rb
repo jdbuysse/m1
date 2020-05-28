@@ -7,7 +7,9 @@ class Concept < ActiveRecord::Base
     end
 
     def self.list_tasks_by_data_structure(data_structure)
-        list = Concept.list_unique_data_structures
+        Concept.where(data_structure: data_structure).find_each do |concept| 
+            puts concept.task
+        end
         binding.pry
     end
 end
