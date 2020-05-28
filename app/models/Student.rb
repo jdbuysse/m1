@@ -3,6 +3,7 @@ class Student < ActiveRecord::Base
     has_many :concepts, through: :lessons
 
     def add_lesson(concept, comfort)
+        # Need to somehow make sure there aren't redundant lessons?
         Lesson.create(
             student_id: self.id,
             concept_id: concept.id,
@@ -61,6 +62,7 @@ class Student < ActiveRecord::Base
         puts "press enter to go back to main menu"
         add_lesson(concept, input)
         gets
+        main_menu
     end
 
     def display_task(concept)
