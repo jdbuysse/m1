@@ -11,6 +11,11 @@ class Student < ActiveRecord::Base
         )
     end
 
+    def other_student
+        puts Lesson.students_from_my_concept(concepts.ids)
+        binding.pry
+    end
+
     def self.find_student(user_input)
         @found_user = all.find_by(name: user_input)
 
@@ -42,10 +47,13 @@ class Student < ActiveRecord::Base
             explore_concepts
         when 2
             puts "2"
+            other_student
         when 3
             puts "3"
         end
     end
+
+    
 
     def explore_concepts
         ds_choice = select_data_structure
@@ -84,5 +92,7 @@ class Student < ActiveRecord::Base
         task_input = gets.chomp
         return tasks[(task_input.to_i)-1]
     end
+
+    
 
 end
