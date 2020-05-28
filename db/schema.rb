@@ -14,16 +14,15 @@ ActiveRecord::Schema.define(version: 3) do
 
   create_table "concepts", force: :cascade do |t|
     t.string "data_structure"
+    t.string "task"
+    t.text "full_description"
   end
 
   create_table "lessons", force: :cascade do |t|
     t.integer "student_id"
     t.integer "concept_id"
-    t.string "task"
     t.date "last_studied"
-    t.string "difficulty"
     t.integer "comfort_level"
-    t.text "full_description"
   end
 
   create_table "students", force: :cascade do |t|
