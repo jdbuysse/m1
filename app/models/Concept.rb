@@ -8,8 +8,6 @@ class Concept < ActiveRecord::Base
 
     def self.list_tasks_by_data_structure(data_structure)
         list = Concept.list_unique_data_structures
-        if data_structure == list
-            return list[0][1]
-        end
+        binding.pry
     end
 end

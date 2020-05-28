@@ -44,7 +44,6 @@ class Student < ActiveRecord::Base
 
     def pick_task
         puts Concept.list_unique_data_structures
-        binding.pry
         input = gets.chomp
         Concept.list_tasks_by_data_structure(input)
     end
