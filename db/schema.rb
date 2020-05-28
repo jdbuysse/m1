@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 3) do
   create_table "lessons", force: :cascade do |t|
     t.integer "student_id"
     t.integer "concept_id"
-    t.date "last_studied"
+    t.string "last_studied"
     t.integer "comfort_level"
   end
 

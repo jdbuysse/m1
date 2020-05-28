@@ -3,6 +3,7 @@ require 'pry'
 
 
 def welcome
+    binding.pry
     puts "Welcome to the app!"
     puts "Enter a new or existing student name to continue"
     student_name_prompt = gets.chomp
