@@ -20,7 +20,7 @@ class Student < ActiveRecord::Base
     end
 
     def main_menu
-        puts "Back to main"
+
         prompt = TTY::Prompt.new
 
         choices = {
@@ -30,6 +30,23 @@ class Student < ActiveRecord::Base
         }
 
         menu_response = prompt.select("\nWhat would you like to do?", choices)
+
+        case menu_response
+        when 1
+            puts "1"
+            pick_task
+        when 2
+            puts "2"
+        when 3
+            puts "3"
+        end
+    end
+
+    def pick_task
+        puts Concept.list_unique_data_structures
+        binding.pry
+        input = gets.chomp
+        Concept.list_tasks_by_data_structure(input)
     end
 
 end

@@ -10,6 +10,11 @@ c1 = Concept.create(
     full_description: "Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value."
 )
 
+c2 = Concept.create(
+    data_structure: "Binary Tree",
+    task: "Reverse a binary tree's leaves",
+    full_description: ""
+)
 
 l1 = Lesson.create(
     student_id: s1.id,
