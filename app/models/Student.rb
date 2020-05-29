@@ -81,7 +81,12 @@ class Student < ActiveRecord::Base
         puts "you're at a #{input}? great! we'll add that info"
         puts "press enter to go back to main menu"
         #add logic here to either make a new one or update
-        #add_lesson(concept, input)
+        lesson = Lesson.find_lesson_by_student(self.id)
+        if lesson == nil
+            add_lesson(concept, input)
+        else
+            update_lesson(lesson, input)
+        end
         gets
         main_menu
     end
