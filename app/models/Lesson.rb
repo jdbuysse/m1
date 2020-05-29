@@ -5,13 +5,15 @@ class Lesson < ActiveRecord::Base
 
     def self.students_from_my_concept(my_concept)
         # classmmate = Concept.where(concept_id: my_concept)
+        # Student.where(name: , rating: 4).exists?
+
         if Concept.exists?(:concept_id=> my_concept)
             classmmate = Concept.find(:student_id, :concept_id=>my_concept)
             puts "There are many"
-            Student.find_by(:name, :student_id => classmmate)
+            Student.where(:name, :student_id => classmmate)
 
         else
-            puts "Oh well"
+            puts "Oh well there is no one" + my_concept 
             puts my_concept
             puts "There are none"
             
