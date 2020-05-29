@@ -17,6 +17,7 @@ class Student < ActiveRecord::Base
             last_studied: Time.now.strftime("%d/%m/%Y"), 
             comfort_level: comfort
         )
+        lesson.save
     end
 
     # this is giving me problems--need to investigate later
@@ -54,6 +55,7 @@ class Student < ActiveRecord::Base
             'See who else is here' => 2,
             'Exit the program' => 3,
             'debug/test' => 4,
+            'see your lessons' => 5
         }
         menu_response = prompt.select("\nWhat would you like to do?", choices)
         case menu_response
@@ -65,6 +67,8 @@ class Student < ActiveRecord::Base
             puts "3"
         when 4
             binding.pry
+        when 5
+            list_student_concepts
         end
     end
 
@@ -80,8 +84,8 @@ class Student < ActiveRecord::Base
         input = gets.chomp
         puts "you're at a #{input}? great! we'll add that info"
         puts "press enter to go back to main menu"
-        #add logic here to either make a new one or update
         lesson = Lesson.find_lesson_by_student(self.id)
+        binding.pry
         if lesson == nil
             add_lesson(concept, input)
         else
@@ -111,6 +115,15 @@ class Student < ActiveRecord::Base
         tasks.each_with_index { |task, index| puts "#{index +1}. #{task} \n" }
         task_input = gets.chomp
         return tasks[(task_input.to_i)-1]
+    end
+
+    def list_student_concepts
+        lessons = Lesson.find_all_lessons_by_student(self.id)
+        lessons.each do |lesson| 
+            Concept.print_by_id(lesson.concept_id) 
+            puts "you rated your comfort at #{lesson.comfort_level.to_s} when you last studied this on #{lesson.last_studied}"
+        end
+        
     end
 
 end
