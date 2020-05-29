@@ -20,16 +20,10 @@ class Student < ActiveRecord::Base
         lesson.save
     end
 
-    # this is giving me problems--need to investigate later
-    # def create_or_update(lesson, concept, comfort)
-    #     Lesson.where(student_id: self.id, concept_id: concept.id).first_or_create(
-    #         student_id: self.id,
-    #         concept_id: concept.id,
-    #         last_studied: Time.now.strftime("%d/%m/%Y"),
-    #         comfort_level: comfort
-    #     )
-    #     binding.pry
-    # end
+    def self.list_names
+        puts "Here's who else is working:"
+        Student.all.each {|s| puts s.name}
+    end
 
     def self.find_student(user_input)
         @found_user = all.find_by(name: user_input)
@@ -62,9 +56,13 @@ class Student < ActiveRecord::Base
         when 1
             explore_concepts
         when 2
-            puts "2"
+            binding.pry
+            Student.list_names
+            puts "press any key to continue"
+            gets
+            main_menu
         when 3
-            puts "3"
+            puts "Goodbye!"
         when 4
             binding.pry
         when 5
@@ -85,7 +83,6 @@ class Student < ActiveRecord::Base
         puts "you're at a #{input}? great! we'll add that info"
         puts "press enter to go back to main menu"
         lesson = Lesson.find_lesson_by_student(self.id)
-        binding.pry
         if lesson == nil
             add_lesson(concept, input)
         else
