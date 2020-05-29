@@ -12,6 +12,24 @@ class Student < ActiveRecord::Base
         )
     end
 
+    def update_lesson(lesson, comfort)
+        lesson.update(
+            last_studied: Time.now.strftime("%d/%m/%Y"), 
+            comfort_level: comfort
+        )
+    end
+
+    # this is giving me problems--need to investigate later
+    # def create_or_update(lesson, concept, comfort)
+    #     Lesson.where(student_id: self.id, concept_id: concept.id).first_or_create(
+    #         student_id: self.id,
+    #         concept_id: concept.id,
+    #         last_studied: Time.now.strftime("%d/%m/%Y"),
+    #         comfort_level: comfort
+    #     )
+    #     binding.pry
+    # end
+
     def self.find_student(user_input)
         @found_user = all.find_by(name: user_input)
 
@@ -30,12 +48,12 @@ class Student < ActiveRecord::Base
     end
 
     def main_menu
-
         prompt = TTY::Prompt.new
         choices = {
             'Explore concepts' => 1,
             'See who else is here' => 2,
             'Exit the program' => 3,
+            'debug/test' => 4,
         }
         menu_response = prompt.select("\nWhat would you like to do?", choices)
         case menu_response
@@ -45,6 +63,8 @@ class Student < ActiveRecord::Base
             puts "2"
         when 3
             puts "3"
+        when 4
+            binding.pry
         end
     end
 
@@ -60,7 +80,8 @@ class Student < ActiveRecord::Base
         input = gets.chomp
         puts "you're at a #{input}? great! we'll add that info"
         puts "press enter to go back to main menu"
-        add_lesson(concept, input)
+        #add logic here to either make a new one or update
+        #add_lesson(concept, input)
         gets
         main_menu
     end
