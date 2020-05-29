@@ -9,6 +9,8 @@ gem 'sqlite3', '~>1.3.6'
 gem 'pry'
 gem 'tty-prompt'
 
+gem 'faker', '~> 2.11'
+
 group :test do
   gem 'rspec'
   gem 'rack-test'

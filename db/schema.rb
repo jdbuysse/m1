@@ -10,24 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 2020_05_29_085017) do
 
   create_table "concepts", force: :cascade do |t|
-    t.string "data_structure"
-    t.string "task"
+    t.integer "student_id"
+    t.text "task"
     t.text "full_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_concepts_on_student_id"
   end
 
   create_table "lessons", force: :cascade do |t|
     t.integer "student_id"
-    t.integer "concept_id"
-    t.string "last_studied"
-    t.integer "comfort_level"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_lessons_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
-    t.string "track"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

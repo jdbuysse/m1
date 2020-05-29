@@ -1,2 +1,2 @@
 adapter: 'sqlite3'
-database: 'db/activelearner.db'
+database: 'db/learning.db'
