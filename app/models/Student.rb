@@ -53,6 +53,7 @@ class Student < ActiveRecord::Base
             'Explore concepts' => 1,
             'See who else is here' => 2,
             'Exit the program' => 3,
+            'debug/test' => 4,
         }
         menu_response = prompt.select("\nWhat would you like to do?", choices)
         case menu_response
@@ -62,6 +63,8 @@ class Student < ActiveRecord::Base
             puts "2"
         when 3
             puts "3"
+        when 4
+            binding.pry
         end
     end
 
