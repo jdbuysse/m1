@@ -20,5 +20,10 @@ class Concept < ActiveRecord::Base
         Concept.find_by id: id
     end
 
+    def self.print_by_id(id)
+        puts Concept.find_by_id(id).task 
+        puts Concept.find_by_id(id).full_description
+    end
+
 
 end
