@@ -3,13 +3,12 @@ class Student < ActiveRecord::Base
     has_many :concepts, through: :lessons
 
     def add_lesson(concept, comfort)
-        # Need to somehow make sure there aren't redundant lessons?
         Lesson.create(
             student_id: self.id,
             concept_id: concept.id,
             last_studied: Time.now.strftime("%d/%m/%Y"),
             comfort_level: comfort,
-        )
+        ).save
     end
 
     def update_lesson(lesson, comfort)
@@ -56,7 +55,6 @@ class Student < ActiveRecord::Base
         when 1
             explore_concepts
         when 2
-            binding.pry
             Student.list_names
             puts "press any key to continue"
             gets
@@ -116,11 +114,13 @@ class Student < ActiveRecord::Base
 
     def list_student_concepts
         lessons = Lesson.find_all_lessons_by_student(self.id)
+        binding.pry
         lessons.each do |lesson| 
             Concept.print_by_id(lesson.concept_id) 
+            puts "\n"
             puts "you rated your comfort at #{lesson.comfort_level.to_s} when you last studied this on #{lesson.last_studied}"
+            puts "\n"
         end
-        
     end
 
 end
